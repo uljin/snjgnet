@@ -1,1 +1,71 @@
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
 
+body {
+  margin: 0;
+  padding: 2rem 1.5rem;
+  background: #000;
+  color: #c0c0c0;
+  font-family: 'DungGeunMo', monospace;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 520px;
+}
+
+.frame {
+  border: 1px solid #666;
+  padding: 1.2rem;
+}
+
+.header {
+  margin: 0 0 1.5rem 0;
+  color: #9acd32;
+}
+
+.intro {
+  margin-bottom: 2rem;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links li {
+  margin: 0.6rem 0;
+}
+
+a {
+  color: #9acd32;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* 깜빡이는 커서 */
+.cursor::after {
+  content: "█";
+  margin-left: 4px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
