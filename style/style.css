@@ -7,29 +7,32 @@
 
 body {
   margin: 0;
-  padding: 2rem 1.5rem;
-  background: #000;
-  color: #c0c0c0;
+  background: #d9d4cc; /* 바깥 베이지 프레임 */
   font-family: 'DungGeunMo', monospace;
-  line-height: 1.6;
 }
 
-main {
-  max-width: 520px;
+.screen {
+  margin: 2rem;
+  background: #00008b;
+  color: #ffffff;
+  border: 2px solid #ffffff;
 }
 
-.frame {
-  border: 1px solid #666;
-  padding: 1.2rem;
+.topbar {
+  text-align: center;
+  padding: 0.8rem 0;
+  border-bottom: 2px solid #ffffff;
+  font-size: 1.1rem;
 }
 
-.header {
-  margin: 0 0 1.5rem 0;
-  color: #9acd32;
+.content {
+  padding: 3rem 2.5rem 4rem;
 }
 
-.intro {
-  margin-bottom: 2rem;
+.main-text {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  margin: 0 0 3rem 0;
 }
 
 .links {
@@ -40,10 +43,11 @@ main {
 
 .links li {
   margin: 0.6rem 0;
+  font-size: 1rem;
 }
 
 a {
-  color: #9acd32;
+  color: #ffff99;
   text-decoration: none;
 }
 
@@ -51,16 +55,10 @@ a:hover {
   text-decoration: underline;
 }
 
-footer {
-  margin-top: 3rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-/* 깜빡이는 커서 */
+/* 커서 */
 .cursor::after {
-  content: "█";
-  margin-left: 4px;
+  content: "▮";
+  margin-left: 6px;
   animation: blink 1s steps(1) infinite;
 }
 
