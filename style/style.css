@@ -49,7 +49,7 @@ main {
 .main-text {
   font-size: 1.2rem;
   line-height: 1.8;
-  margin: 0 0 3rem 0;
+  margin: 0 0 2rem 0;
 }
 
 .links {
@@ -59,7 +59,7 @@ main {
 }
 
 .links li {
-  margin: 0.6rem 0;
+  margin: 0.8rem 0;
   font-size: 1rem;
 }
 
@@ -74,7 +74,7 @@ a:hover {
 
 footer {
   width: 100%
-  font-size: 0.75rem;
+  font-size: 1rem;
   opacity: 0.6;
   padding: 1rem 0;
   align-self: center;
@@ -82,8 +82,9 @@ footer {
 }
 
 hr {
-  width: 50%;
-  color: #FFFFFF
+  width: 100%;
+  color: #FFFFFF;
+  margin: 2rem auto 2rem;
 }
 
 /* 커서 */
@@ -105,24 +106,25 @@ hr {
 
 .intro {
   margin-bottom: 1.5rem;
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 .input-area {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .input-area span {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .input-area input {
   background: transparent;
   border: none;
-  outline: none;
+  outline: 1px solid #ffffff;
 
+  padding: 0.4rem;
   color: #ffffff;
   font-family: inherit;
   font-size: 1rem;
@@ -140,7 +142,8 @@ hr {
   color: #ffffff;           /* 흰색 글자 */
   font-family: inherit;
   cursor: pointer;
-  padding: 2px 8px;
+  padding: 6px 12px;
+  font-size: 1rem;
 }
 
 .input-area button:hover {
