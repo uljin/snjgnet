@@ -37,6 +37,21 @@
           <li>2. <a href="https://instagram.com/snjg._">instagram</a></li>
           <li>3. <a href="mailto:soonjeong@soonjeong.net">mail</a></li>
         </ul>
+
+        <p class="intro">
+          번호를 입력하세요.<br>
+          설명은 없습니다.
+        </p>
+
+        <form onsubmit="go(); return false;" class="input-area">
+          <span>&gt;</span>
+          <input
+            type="number"
+            id="code"
+            autocomplete="off"
+            placeholder="번호"
+          >
+        </form>
         
       </div>
     </div>
@@ -46,6 +61,13 @@
     © 조건 없는 사이트<br>
     조건이 생기는 경우 삭제합니다.
   </footer>
+  <script>
+    function go() {
+      const code = document.getElementById('code').value.trim();
+      if (!code) return;
+      window.location.href = '/${code}.html';
+    }
+  </script>
   <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
