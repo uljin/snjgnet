@@ -133,3 +133,17 @@ hr {
 .input-area input::placeholder {
   color: rgba(255,255,255,0.5);
 }
+
+.input-area button {
+  background: transparent;  /* 배경 투명 */
+  border: 1px solid #ffffff; /* 흰색 테두리만 */
+  color: #ffffff;           /* 흰색 글자 */
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+.input-area button:hover {
+  background: #ffffff;      /* 마우스 올리면 반전 */
+  color: #00008b;           /* 배경색인 파란색으로 글자색 변경 */
+}
