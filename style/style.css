@@ -81,6 +81,11 @@ footer {
   text-align: left;
 }
 
+hr {
+  width: 50%;
+  color: #FFFFFF
+}
+
 /* 커서 */
 .cursor::after {
   content: "▮";
