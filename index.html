@@ -51,6 +51,7 @@
             inputmode="numeric"
             id="code"
             placeholder="번호"
+            autocomplete="off"
             required
           >
           <button type="submit">go</button>
@@ -65,13 +66,12 @@
   </footer>
   <script>
     function go() {
-      const code = document.getElementById('code').value.trim();
+      const codeInput = document.getElementById('code');
+      const code = codeInput.value.trim();
       
       if (code) {
         // 반드시 백틱(`)을 사용하세요!
         window.location.href = `/${code}.html`;
-      } else {
-        alert("번호를 입력해주세요.");
       }
     }
   </script>
