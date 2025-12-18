@@ -64,24 +64,30 @@
     © 조건 없는 사이트<br>
     조건이 생기는 경우 삭제합니다.
   </footer>
-  <script>
-    function go() {
-      const codeInput = document.getElementById('code');
-      const goBtn = document.getElementById('goBtn');
-
-      goBtn.onclick = function() {
-        const code = codeInput.value.trim();
-        if (code) {
-          window.location.href = '/${code}.html';
-        }
-      }
-      codeInput.onkyepress = function(e) {
-        if (e.key === 'Enter') {
-          goBtn.click();
-        }
-      }
+<script>
+  function go() {
+    const code = document.getElementById('code').value.trim();
+    
+    if (code) {
+      // 반드시 백틱(`)을 사용하세요!
+      window.location.href = `/${code}.html`;
+    } else {
+      alert("번호를 입력해주세요.");
     }
-  </script>
+  }
+</script>
+
+<form onsubmit="go(); return false;" class="input-area">
+  <span>&gt;</span>
+  <input
+    type="number"
+    id="code"
+    placeholder="번호"
+    required
+  >
+  <button type="submit">go</button>
+</form>
+
   <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
