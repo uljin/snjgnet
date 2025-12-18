@@ -16,15 +16,14 @@ body {
   font-family: 'DungGeunMo', monospace;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 1rem;
 }
 
 main {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding-top: 1rem;
 }
 
 .screen {
@@ -74,9 +73,11 @@ a:hover {
 }
 
 footer {
+  width: 100%
   font-size: 0.75rem;
   opacity: 0.6;
   padding: 1rem 0;
+  justify-content: center;
 }
 
 /* 커서 */
