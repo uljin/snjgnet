@@ -7,8 +7,14 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: #d9d4cc; /* 바깥 베이지 프레임 */
   font-family: 'DungGeunMo', monospace;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 3rem;
 }
 
 .screen {
