@@ -93,3 +93,38 @@ footer {
     opacity: 0;
   }
 }
+
+.content {
+  padding: 2rem;
+}
+
+.intro {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-area span {
+  font-size: 1rem;
+}
+
+.input-area input {
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  width: 8rem;
+}
+
+/* 커서 느낌 강화 */
+.input-area input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
