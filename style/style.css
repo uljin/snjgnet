@@ -5,16 +5,27 @@
   font-display: swap;
 }
 
+html, body {
+  height: 100%
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   background: #d9d4cc; /* 바깥 베이지 프레임 */
   font-family: 'DungGeunMo', monospace;
-
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding-top: 3rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .screen {
@@ -61,6 +72,13 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  padding: 1rem 0;
 }
 
 /* 커서 */
