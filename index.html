@@ -53,7 +53,7 @@
             autocomplete="off"
             placeholder="번호"
           >
-          <button type="submit">go</button>
+          <button type="submit" id="goBtn">go</button>
         </form>
         
       </div>
@@ -66,9 +66,20 @@
   </footer>
   <script>
     function go() {
-      const code = document.getElementById('code').value.trim();
-      if (!code) return;
-      window.location.href = '/${code}.html';
+      const codeInput = document.getElementById('code');
+      const goBtn = document.getElementById('goBtn');
+
+      goBtn.onclick = function() {
+        const code = codeInput.value.trim();
+        if (code) {
+          window.location.href = '/${code}.html';
+        }
+      }
+      codeInput.onkyepress = function(e) {
+        if (e.key === 'Enter') {
+          goBtn.click();
+        }
+      }
     }
   </script>
   <!-- 100% privacy-first analytics -->
