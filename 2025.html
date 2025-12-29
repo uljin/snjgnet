@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>2025년을 보내며</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #111;
+    color: #eee;
+    font-family: "Noto Serif KR", serif;
+  }
+
+  .book {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 오디오 */
+  .audio-header {
+    width: 100%;
+    max-width: 640px;
+    padding: 1.5rem 2.5rem 0;
+    opacity: 0.85;
+  }
+
+  .audio-header audio {
+    width: 100%;
+  }
+
+  .audio-caption {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 0.4rem;
+  }
+
+  /* 페이지 */
+  .page {
+    display: none;
+    max-width: 640px;
+    padding: 2.5rem;
+    line-height: 1.9;
+  }
+
+  .page.active {
+    display: block;
+    animation: fade 0.4s ease;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    opacity: 0.6;
+    margin-bottom: 2rem;
+  }
+
+  blockquote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    border-left: 2px solid #444;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .signature {
+    margin-top: 2rem;
+    opacity: 0.6;
+  }
+
+  /* 컨트롤 */
+  .controls {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #555;
+    color: #eee;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #222;
+  }
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<main class="book">
+
+  <!-- 오디오 -->
+  <header class="audio-header">
+    <audio controls preload="none">
+      <source src="narration.mp3" type="audio/mpeg">
+    </audio>
+    <p class="audio-caption">낭독 · 정수은</p>
+  </header>
+
+  <!-- 표지 -->
+  <section class="page active">
+    <h1>2025년을 보내며…</h1>
+    <p class="subtitle">단 한 사람에게.</p>
+    <p>
+      안녕하세요, 수은입니다.<br>
+      이렇게 또 한 해가 지나가네요. 제 옆에 있는 분들께 전하고 싶은 이야기들이
+      무언가 생겨서 이렇게 편지를 써봅니다.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#1</h2>
+    <p>
+      지난 달에 부모님을 뵈러 오랜만에 고향에 갔었어요. 한가한 토요일 오후에
+      딱히 만날 사람은 없어서 상근예비역으로 병역을 치르고 있을 때
+      뻔질나게 갔던 시립도서관에 갔어요.
+    </p>
+    <p>
+      도서관에 들어서니 대부분의 사람들이 문제집이나 자격증 교재 같은 것들을
+      풀고 있더라고요.
+    </p>
+    <p>
+      책들이 외치는 게 아니라 소곤소곤
+      “나 좀 읽어봐 봐.” 하고 말을 거는 것 같았어요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#2</h2>
+    <p>
+      아마 스무살 이후로 저는 거의 항상 살고 싶지 않았어요.
+      삶에 대한 애착이 전혀 없었고, 때때로는 죽고 싶었어요.
+    </p>
+    <p>
+      그러면서도 병원에 가고 상담을 받는 저 자신을 보며
+      “죽고 싶다면서 왜 꾸역꾸역 살려고 하지?”라는 생각을 했어요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#3 — 씨앗</h2>
+    <p>
+      잘 보존된 씨앗은 몇 천 년, 몇 만 년이 지나도
+      조건이 맞으면 싹을 틔운다고 하더라고요.
+    </p>
+    <p>
+      나도 그냥 생명이라서 계속 살려고 하는 거구나.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#4 — 단 한 사람</h2>
+    <p>
+      부정적 연쇄를 끊어낸 사람들의 공통점은
+      ‘단 한 사람’이라고 하더라고요.
+    </p>
+    <p>
+      제겐 떠오르지 않았어요. 대신 노래와 영화와 책이 있었어요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#5</h2>
+    <p>
+      마음 속 어딘가는 언제가 될지는 모르지만
+      “삶은 살만한 것이다”라고 말하게 될 거라는
+      아주 작은 생각이 있었어요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#6</h2>
+    <p>계속 살아도 괜찮다고요.</p>
+    <p>존재하고 살아가는 것에는 자격이 없다고요.</p>
+    <p>그러니까 존재하는 누구나 자격 있는 것이라고요.</p>
+    <p>여기에 당신이 있어도 되는 장소가 분명히 있다고.</p>
+  </section>
+
+  <section class="page">
+    <p>
+      세상 어딘가에는, 알지도 못하는 누군가의 삶을
+      아파하는 사람들이 분명히 있다고 믿고 싶어졌어요.
+    </p>
+    <p>
+      그래서 저도 계속 말하면서 살기로 했어요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#7</h2>
+    <p>
+      살고 싶어졌어요.
+      한 번 정성껏 살아보고 싶어졌어요.
+    </p>
+    <p>
+      이 글을 읽고 있는 당신도,
+      제 곁을 스쳐간 ‘단 한 사람’ 중 하나일 거예요.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>#8 — 잔해로서의 이미지</h2>
+    <blockquote>
+      당신은 이 세계 속을 걸어가는 사람…<br>
+      그러니까 시선이 닿은 바로 그 지점부터.
+    </blockquote>
+    <p class="signature">
+      2025년의 끝자락에서<br>
+      정수은 드림
+    </p>
+  </section>
+
+  <nav class="controls">
+    <button id="prev">이전</button>
+    <button id="next">다음</button>
+  </nav>
+
+</main>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  let current = 0;
+
+  function showPage(i) {
+    pages.forEach(p => p.classList.remove('active'));
+    pages[i].classList.add('active');
+  }
+
+  document.getElementById('next').onclick = () => {
+    if (current < pages.length - 1) showPage(++current);
+  };
+
+  document.getElementById('prev').onclick = () => {
+    if (current > 0) showPage(--current);
+  };
+</script>
+
+</body>
+</html>
