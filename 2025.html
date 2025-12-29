@@ -313,7 +313,7 @@
 
   nextBtn.onclick = () => {
     if (current === pages.length - 1){
-      window.location.href = END_LINK;
+      window.open(END_LINK, "_blank");
     } else {
       showPage(++current);
     }
