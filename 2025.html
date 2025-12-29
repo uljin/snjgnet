@@ -292,6 +292,8 @@
 
   let current = 0;
 
+  const END_LINK = "https://youtube.com/shorts/-mMkbEVPies";
+
   totalSpan.textContent = pages.length;
 
   function showPage(i) {
@@ -310,7 +312,9 @@
   }
 
   nextBtn.onclick = () => {
-    if (current < pages.length - 1) {
+    if (current === pages.length - 1){
+      window.location.href = END_LINK;
+    } else {
       showPage(++current);
     }
   };
