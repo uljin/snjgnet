@@ -62,6 +62,27 @@
     (조건이 생기는 경우 삭제합니다.)
   </footer>
   <script>
+  function go() {
+    const code = document.getElementById('code').value.trim();
+
+    const links = {
+      0: "https://unqualified.soonjeong.net",
+      1: "https://blog.soonjeong.net",
+      2: "https://instagram.com/snjg._",
+      3: "https://www.youtube.com/@se8sd7ld5h"
+    };
+
+    if (!code) return;
+
+    if (links.hasOwnProperty(code)) {
+      window.location.href = links[code];
+    } else {
+      window.location.href = `/${code}`;
+    }
+  }
+</script>
+  <!-- 
+  <script>
     function go() {
       const codeInput = document.getElementById('code');
       const code = codeInput.value.trim();
@@ -72,6 +93,7 @@
       }
     }
   </script>
+   -->
   <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
