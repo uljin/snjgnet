@@ -151,3 +151,248 @@ hr {
   background: #ffffff;      /* 마우스 올리면 반전 */
   color: #00008b;           /* 배경색인 파란색으로 글자색 변경 */
 }
+
+
+/* ───────── 여기부터 추가분 ───────── */
+
+.screen {
+  position: relative;
+  word-break: keep-all;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.22);
+}
+
+/* 브라운관 줄무늬 */
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+::selection {
+  background: #ffff99;
+  color: #00008b;
+}
+
+/* 닫기 버튼 (닫히지 않음) */
+.topbar {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: #ffffff;
+  color: #00008b;
+}
+
+.reply {
+  white-space: pre-line;
+}
+
+.input-area {
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.input-area button {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.input-area input {
+  flex: 1;
+  min-width: 4.5rem;
+  max-width: 8rem;
+}
+
+/* 대답이 찍히는 자리 */
+.reply {
+  min-height: 3.2em;
+  margin: 1.5rem 0 0;
+  line-height: 1.6;
+  color: #ffff99;
+}
+
+.reply:not(:empty)::before {
+  content: "< ";
+}
+
+/* 약관 */
+.reply:empty:has(+ .terms:not([hidden])) {
+  display: none;
+}
+
+.terms {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed #ffffff;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.terms p {
+  margin: 0 0 1rem;
+}
+
+.terms-title {
+  text-align: center;
+}
+
+.terms-buttons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #ffffff;
+  color: #00008b;
+}
+
+/* 맨 아래 기능키 줄 */
+.statusbar {
+  display: flex;
+  border-top: 2px solid #ffffff;
+  background: #ffffff;
+}
+
+.statusbar button {
+  flex: 1;
+  padding: 0.5rem 0.2rem;
+  background: transparent;
+  border: none;
+  color: #00008b;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.statusbar button + button {
+  border-left: 2px solid #00008b;
+}
+
+.statusbar button:hover,
+.statusbar button:active {
+  background: #00008b;
+  color: #ffffff;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid #ffff99;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor::after {
+    animation: none;
+  }
+}
+
+/* 가짜 연결 바 */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.loading[hidden] {
+  display: none;
+}
+
+.bar {
+  flex: 1;
+  height: 1.2rem;
+  padding: 2px;
+  border: 1px solid #ffffff;
+}
+
+.bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: repeating-linear-gradient(to right, #ffffff 0 8px, transparent 8px 10px);
+}
+
+.pct {
+  width: 3rem;
+  text-align: right;
+}
+
+/* 화면보호기 */
+.saver {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: #000000;
+  cursor: none;
+}
+
+#saver-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.3rem 0.7rem;
+  border: 2px solid currentColor;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* 인쇄하면 한 줄만 나옴 */
+.print-only {
+  display: none;
+}
+
+@media print {
+  body {
+    display: block;
+    background: #ffffff;
+  }
+
+  .print-only {
+    display: block;
+    margin: 3rem;
+    color: #000000;
+    font-size: 1.2rem;
+  }
+
+  .print-only ~ main,
+  .print-only ~ footer {
+    display: none;
+  }
+}
