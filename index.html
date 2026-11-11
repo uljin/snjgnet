@@ -12,22 +12,29 @@
   <meta property="og:site_name" content="조건 없는 사이트">
   <meta property="og:url" content="https://soonjeong.net/">
   <meta property="og:image" content="https://soonjeong.net/img/og.png">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
+  <p class="print-only">굳이, 인쇄까지 하셨네요.</p>
+
   <main>
     <div class="screen">
       <div class="topbar">
         조건 없는 사이트
+        <button type="button" class="close" id="close" aria-label="닫기">×</button>
       </div>
-  
+
       <div class="content">
         <p class="main-text">
           굳이, 여기까지 오셨네요.<br>
           눌러 보셔도 되고, 안 눌러 보셔도 되고...<span class="cursor"></span>
         </p>
-  
+
+        <!-- 순서가 곧 번호. 여기만 고치면 아래 입력창도 따라옴 -->
         <ul class="links">
           <li>0. <a href="https://unqualified.soonjeong.net">자격 없는 사이트</a></li>
           <li>1. <a href="https://blog.soonjeong.net">blog</a></li>
@@ -40,7 +47,7 @@
           설명은 없습니다.
         </p>
 
-        <form onsubmit="go(); return false;" class="input-area">
+        <form class="input-area" id="form">
           <span>&gt;</span>
           <input
             type="number"
@@ -52,8 +59,37 @@
             required
           >
           <button type="submit">go</button>
-        </form>        
+        </form>
+
+        <p class="reply" id="reply" aria-live="polite"></p>
+
+        <div class="loading" id="loading" hidden>
+          <div class="bar"><span></span></div>
+          <span class="pct">0%</span>
+        </div>
+
+        <div class="terms" id="terms" hidden>
+          <p class="terms-title">이용약관</p>
+          <p>
+            제1조 (목적) 없습니다.<br>
+            제2조 (조건) 없습니다.<br>
+            제3조 (제2조의 예외) 없습니다.<br>
+            제4조 (약관의 변경) 조건이 생기는 경우 삭제합니다.
+          </p>
+          <div class="terms-buttons">
+            <button type="button" class="btn" data-agree="동의하셨습니다.">동의</button>
+            <button type="button" class="btn" data-agree="동의하지 않으셨습니다.">비동의</button>
+          </div>
+        </div>
       </div>
+
+      <div class="statusbar">
+        <button type="button" data-key="F1">F1 도움말</button>
+        <button type="button" data-key="F2">F2 약관</button>
+        <button type="button" data-key="Escape">ESC 나가기</button>
+      </div>
+
+      <div class="saver" id="saver" hidden><span id="saver-text">조건 없음</span></div>
     </div>
   </main>
 
@@ -61,39 +97,156 @@
     © 2025 조건 없는 사이트. All rights (not) reserved.<br>
     (조건이 생기는 경우 삭제합니다.)
   </footer>
+
   <script>
-  function go() {
-    const code = document.getElementById('code').value.trim();
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const input = $('code'), reply = $('reply'), terms = $('terms');
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const links = {
-      0: "https://unqualified.soonjeong.net",
-      1: "https://blog.soonjeong.net",
-      2: "https://instagram.com/snjg._",
-      3: "https://www.youtube.com/@se8sd7ld5h"
-    };
-
-    if (!code) return;
-
-    if (links.hasOwnProperty(code)) {
-      window.location.href = links[code];
-    } else {
-      window.location.href = `/${code}`;
+    /* ── 타자기 ─────────────────────────────── */
+    const timers = new WeakMap();
+    function type(el, text, speed) {
+      clearInterval(timers.get(el));
+      if (calm || !text) { el.textContent = text; return; }
+      const chars = Array.from(text);
+      let i = 0;
+      el.textContent = '';
+      const t = setInterval(() => {
+        el.textContent += chars[i++];
+        if (i >= chars.length) clearInterval(t);
+      }, speed || 28);
+      timers.set(el, t);
     }
-  }
-</script>
-  <!-- 
-  <script>
+    let spoke = false;
+    function say(text) { spoke = true; terms.hidden = true; type(reply, text); }
+
+    /* ── 번호 ───────────────────────────────── */
+    const links = Array.from(document.querySelectorAll('.links a')).map((a) => a.href);
+
+    let busy = false;
     function go() {
-      const codeInput = document.getElementById('code');
-      const code = codeInput.value.trim();
-      
-      if (code) {
-        // 반드시 백틱(`)을 사용하세요!
-        window.location.href = `/${code}`;
-      }
+      const code = input.value.trim();
+      if (!code || busy) return;
+      const url = links.hasOwnProperty(code) ? links[code] : `/${code}`;
+      if (calm) { window.location.href = url; return; }
+      busy = true;
+      connect(code, () => { window.location.href = url; });
     }
+
+    /* ── 가짜 연결 바: 99%에서 한참 멈춤 ─────── */
+    const loading = $('loading');
+    const fill = loading.querySelector('.bar span'), pct = loading.querySelector('.pct');
+    function connect(code, done) {
+      const set = (v) => { fill.style.width = v + '%'; pct.textContent = v + '%'; };
+      const steps = [[12, 150], [31, 150], [38, 250], [64, 150], [87, 200], [99, 250]]; // [%, 기다릴 ms]
+      let i = 0;
+      say(code + '번. 연결 중...');
+      set(0);
+      loading.hidden = false;
+      (function next() {
+        if (i < steps.length) {
+          const step = steps[i++];
+          setTimeout(() => { set(step[0]); next(); }, step[1]);
+        } else {
+          setTimeout(() => say('거의 다 됐습니다.'), 700);
+          setTimeout(() => { set(100); setTimeout(done, 250); }, 1800);
+        }
+      })();
+    }
+    // 뒤로가기로 돌아왔을 때 바가 남아 있지 않게
+    window.addEventListener('pageshow', (e) => {
+      if (!e.persisted) return;
+      busy = false;
+      loading.hidden = true;
+      type(reply, '');
+    });
+    $('form').addEventListener('submit', (e) => { e.preventDefault(); go(); });
+
+    /* ── 닫기 버튼 (안 닫힘) ─────────────────── */
+    const closing = [
+      '닫히지 않습니다.',
+      '닫는 버튼처럼 생겼을 뿐입니다.',
+      '탭을 닫으시면 됩니다.\n조건 없이요.'
+    ];
+    let closed = 0;
+    $('close').addEventListener('click', () => say(closing[closed++ % closing.length]));
+
+    /* ── F1 / F2 / ESC ──────────────────────── */
+    const keys = {
+      F1: () => say('도움말: 없습니다.\n설명은 없다고 했습니다.'),
+      F2: () => { spoke = true; type(reply, ''); terms.hidden = !terms.hidden; },
+      Escape: () => say('나가는 문은 브라우저에 있습니다.')
+    };
+    document.addEventListener('keydown', (e) => {
+      if (keys[e.key]) { e.preventDefault(); keys[e.key](); }
+    });
+    document.querySelectorAll('.statusbar button').forEach((b) => {
+      b.addEventListener('click', () => keys[b.dataset.key]());
+    });
+    terms.querySelectorAll('[data-agree]').forEach((b) => {
+      b.addEventListener('click', () => say(b.dataset.agree + '\n달라지는 건 없습니다.'));
+    });
+
+    /* ── 가만히 있으면 ──────────────────────── */
+    setTimeout(() => { if (!spoke && !input.value) say('...아직 계시네요.'); }, 30000);
+
+    /* ── 화면보호기: 1분 방치하면 튕겨 다님 ──── */
+    const SAVER_MS = 60000;
+    const saver = $('saver'), logo = $('saver-text');
+    const colors = ['#ffffff', '#ffff99', '#99ffff', '#ff99ff', '#99ff99'];
+    let idle, raf = 0;
+
+    function startSaver() {
+      if (busy || !saver.hidden) return;
+      saver.hidden = false;
+      const maxX = () => saver.clientWidth - logo.offsetWidth;
+      const maxY = () => saver.clientHeight - logo.offsetHeight;
+      const move = (x, y) => { logo.style.transform = 'translate(' + x + 'px,' + y + 'px)'; };
+      if (calm) { move(maxX() / 2, maxY() / 2); return; }
+
+      let x = Math.random() * maxX(), y = Math.random() * maxY();
+      let vx = 70, vy = 55, color = 0, prev = performance.now();   // 초당 px
+      (function frame(now) {
+        const dt = Math.min(now - prev, 50) / 1000;
+        prev = now;
+        x += vx * dt; y += vy * dt;
+        let hit = 0;
+        if (x <= 0 || x >= maxX()) { vx = -vx; x = Math.max(0, Math.min(x, maxX())); hit++; }
+        if (y <= 0 || y >= maxY()) { vy = -vy; y = Math.max(0, Math.min(y, maxY())); hit++; }
+        if (hit) {
+          color = (color + 1) % colors.length;
+          logo.style.color = colors[color];
+          logo.textContent = hit === 2 ? '모서리.' : '조건 없음';   // 정확히 모서리에 맞으면
+        }
+        move(x, y);
+        raf = requestAnimationFrame(frame);
+      })(prev);
+    }
+    function wake() {
+      if (!saver.hidden) { saver.hidden = true; cancelAnimationFrame(raf); }
+      clearTimeout(idle);
+      idle = setTimeout(startSaver, SAVER_MS);
+    }
+    ['pointerdown', 'pointermove', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach((ev) => {
+      window.addEventListener(ev, wake, { passive: true });
+    });
+    wake();
+
+    /* ── 탭을 떠나면 ────────────────────────── */
+    const title = document.title;
+    let back;
+    document.addEventListener('visibilitychange', () => {
+      clearTimeout(back);
+      if (document.hidden) { document.title = '가셨네요.'; return; }
+      document.title = '오셨네요.';
+      back = setTimeout(() => { document.title = title; }, 2000);
+    });
+
+    console.log('%c소스까지 보시네요. 보셔도 되고, 안 보셔도 되고...',
+      'background:#00008b;color:#fff;padding:4px 8px');
+  })();
   </script>
-   -->
   <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
