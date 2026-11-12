@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <p class="print-only">굳이, 인쇄까지 하셨네요.</p>
+  <p class="print-only">이걸 인쇄 하시려고요?</p>
 
   <main>
     <div class="screen">
@@ -238,8 +238,8 @@
     let back;
     document.addEventListener('visibilitychange', () => {
       clearTimeout(back);
-      if (document.hidden) { document.title = '가셨네요.'; return; }
-      document.title = '오셨네요.';
+      if (document.hidden) { document.title = 'Site inconditionnel'; return; }
+      document.title = '無條件網站';
       back = setTimeout(() => { document.title = title; }, 2000);
     });
 
