@@ -54,7 +54,10 @@
   /* 페이지 */
   .page {
     display: none;
+    width: 100%;
     max-width: 640px;
+    flex: 1;
+    word-break: keep-all;
     padding: 1.5rem;
     line-height: 1.8;
   }
@@ -109,9 +112,19 @@
     opacity: 0.875;
   }
 
-  /* 컨트롤 */
+  /* 쪽수 + 이전/다음: 화면 아래에 고정해서 페이지 길이와 상관없이 같은 자리에 */
+  .pager {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0 calc(1.5rem + env(safe-area-inset-bottom));
+    background: #232323; /* body 배경(#111111ec)이 흰 바탕 위에 깔린 색 */
+  }
+
   .controls {
-    margin: 2rem 0;
     display: flex;
     gap: 1rem;
   }
@@ -287,14 +300,16 @@
     </p>
   </section>
 
-  <div class="progress">
-    <span id="currentPage">0</span> / <span id="totalPage">8</span>
-  </div>
+  <div class="pager">
+    <div class="progress">
+      <span id="currentPage">0</span> / <span id="totalPage">8</span>
+    </div>
 
-  <nav class="controls">
-    <button id="prev">이전</button>
-    <button id="next">다음</button>
-  </nav>
+    <nav class="controls">
+      <button id="prev">이전</button>
+      <button id="next">다음</button>
+    </nav>
+  </div>
 
 </main>
 
@@ -303,19 +318,24 @@
   const nextBtn = document.getElementById('next');
   const prevBtn = document.getElementById('prev');
   const currentSpan = document.getElementById('currentPage');
-  const totalSpan = document.getElementById('totalPage') - 1;
+  const totalSpan = document.getElementById('totalPage');
 
   let current = 0;
 
   const END_LINK = "https://youtube.com/shorts/-mMkbEVPies";
 
-  totalSpan.textContent = pages.length;
+  totalSpan.textContent = pages.length - 1; // 표지는 0쪽
 
   function showPage(i) {
     pages.forEach(p => p.classList.remove('active'));
     pages[i].classList.add('active');
 
-    // 페이지 번호 (1부터 보이게)
+    // 긴 페이지 아래에서 넘겼을 때 새 페이지 처음부터 보이게
+    if (pages[i].getBoundingClientRect().top < 0) {
+      pages[i].scrollIntoView({ block: 'start' });
+    }
+
+    // 페이지 번호 (표지가 0)
     currentSpan.textContent = i;
 
     // 다음 버튼 텍스트
