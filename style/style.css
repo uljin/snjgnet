@@ -42,10 +42,6 @@ main {
   font-size: 1.1rem;
 }
 
-.content {
-  padding: 3rem 2.5rem 4rem;
-}
-
 .main-text {
   font-size: 1.2rem;
   line-height: 1.8;
@@ -84,8 +80,9 @@ footer {
 
 hr {
   width: 100%;
-  color: #FFFFFF;
-  margin: 2rem auto 2rem;
+  border: 0;
+  border-top: 1px solid #ffffff;
+  margin: 2rem auto;
 }
 
 /* 커서 */

@@ -126,7 +126,7 @@
 
     let busy = false;
     function go() {
-      const code = input.value.trim();
+      const code = input.value.trim().replace(/^0+(?=\d)/, ''); // 01 → 1
       if (!code || busy) return;
       const url = links.hasOwnProperty(code) ? links[code] : `/${code}`;
       if (calm) { window.location.href = url; return; }
